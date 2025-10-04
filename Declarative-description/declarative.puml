@@ -1,0 +1,51 @@
+@startuml
+
+entity "Customers" as Customers {
+  *id : int <<PK>>
+  --
+  name : varchar(100)
+  email : varchar(100)
+  phone : varchar(20)
+  address : text
+  created_at : datetime
+}
+
+entity "Categories" as Categories {
+  *id : int <<PK>>
+  --
+  name : varchar(100)
+}
+
+entity "Products" as Products {
+  *id : int <<PK>>
+  --
+  name : varchar(100)
+  description : text
+  price : decimal
+  stock : int
+  category_id : int <<FK>>
+}
+
+entity "Orders" as Orders {
+  *id : int <<PK>>
+  --
+  customer_id : int <<FK>>
+  order_date : datetime
+  total : decimal
+}
+
+entity "OrderItems" as OrderItems {
+  *id : int <<PK>>
+  --
+  order_id : int <<FK>>
+  product_id : int <<FK>>
+  quantity : int
+  price : decimal
+}
+
+Customers ||--o{ Orders : "1:N"
+Categories ||--o{ Products : "1:N"
+Orders ||--o{ OrderItems : "1:N"
+Products ||--o{ OrderItems : "1:N"
+
+@enduml
