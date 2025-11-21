@@ -1,4 +1,4 @@
-@startuml
+@startuml lab1
 
 entity "Customers" as Customers {
   *id : int <<PK>>
@@ -43,9 +43,9 @@ entity "OrderItems" as OrderItems {
   price : decimal
 }
 
-Customers ||--o{ Orders : "1:N"
-Categories ||--o{ Products : "1:N"
-Orders ||--o{ OrderItems : "1:N"
-Products ||--o{ OrderItems : "1:N"
+Customers ||--|{ Orders
+Categories ||--|{ Products
+Orders ||--o{ OrderItems
+Products ||--|{ OrderItems
 
 @enduml
